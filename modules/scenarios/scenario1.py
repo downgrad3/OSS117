@@ -38,8 +38,6 @@ class Scenario1:
         exit(1)
         """
 
-
-
         linkedin_crawler = LinkedinCrawler()
         profile_urls = linkedin_crawler.get_profiles_using_google(target_org, google_pages_to_scrap)
         File.write_in_csv(profile_urls, setting.LOOT_DIR + "/" + target_org + "_linkedinProfiles.txt")
@@ -54,8 +52,9 @@ class Scenario1:
             f_out.write(p['name'] + "; " + p['current_job'] + "; " + p['current_job_location'] + "\n")
         f_out.close()
 
-
+        """
         mail_inferor = MailInferor()
         firstname = profiles[0]['name'].split(" ")[0:-1]
         lastname = profiles[0]['name'].split(" ")[-1]
         print(mail_inferor.infer_mail(firstname[0], lastname[0], target_org, "firstname.lastname@org.tld"))
+        """

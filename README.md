@@ -1,2 +1,32 @@
-# OSS117
-Open source scrapper 
+# OSS117 - Open source scrapper 
+
+
+<img src="https://img.static-smb.be/a/view/q75/w720/h480/2090887/e6c6eddf-3a56-4115-90fd-9d18764c912e-gif.gif" alt="looking for intel"/>
+
+OSS117 is a tool designed to collect many data from open sources and transformate them into intelligence.
+It can be used by:
+- Red-teams, during their recon phase to prepare their engagement
+- Blue-teams to see what information their organization concede to a potential adversary
+
+
+The project is built around 3 modules types:
+- COLLECTORS: which are designed to gather data though multiples sources
+- INFERORS: which are designed to find new pieces of data using the data we got
+- EVALUATORS: which are designed to evaluate the data we have
+
+
+Using those modules you can craft the scenarios you want. For instance for a given organization
+
+1. COLLECTORS - Collect all employees (name + job + location) using Linkedin. 
+2. INFERORS + EVALUATOR - Derivate their mails using classical template (fistname.lastname@orgname.tld, etc.)
+and email checker API (deliverability, reputation, etc.)
+3. EVALUATOR - Check if one mail appears in haveIbeenPwned
+
+
+1. COLLECTORS - Collect all employees (name + job + location + interest) using Linkedin. 
+2. INFERORS - Derivate username/password wordlists using the data collected
+
+and so on...
+
+
+This is only the first step for this project, if you have any idea feel free to contact me at tahar.bennacef.farewell@gmail.com
