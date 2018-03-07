@@ -97,7 +97,6 @@ class LinkedinCrawler(CollectorFather):
         return profiles_url
 
     def extract_profiles(self, profile_urls):
-        # todo:  reviewing the return value
         """
             Extracting all linkedin profile giving a list of url pointing on those profiles
 
@@ -118,7 +117,6 @@ class LinkedinCrawler(CollectorFather):
         return extracted_profiles
 
     def extract_profile(self, profile_url):
-        # todo:  reviewing the return value
         """
             Extract the person profile given the linkedIn profile url
 

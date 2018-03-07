@@ -31,7 +31,6 @@ class SocietecomCrawler(CollectorFather):
     def extract_information(self, link):
         self.logger.debug("BEGIN -- (link:" + link + ")")
         res = []
-
         self.driver.get(link)
         org_name = self.driver.find_element_by_class_name("nomSociete").text
         address_bloc = self.driver.find_elements_by_class_name("adressText")
@@ -39,6 +38,5 @@ class SocietecomCrawler(CollectorFather):
         (postal_code, town) = address_bloc[1].text.split()
         country = address_bloc[2].text
         res = [org_name, street, postal_code, town, country]
-
-        self.logger.debug("BEGIN -- (res:" + str(res) + ")")
+        self.logger.debug("END -- (res:" + str(res) + ")")
         return res
