@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from modules.core.Person import Mail
+from modules.core.Mail import Mail
 from modules.evaluators.MailEvaluator import MailEvaluator
 
 

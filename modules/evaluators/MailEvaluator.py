@@ -5,7 +5,7 @@ import neverbounce_sdk
 import requests
 from pyhunter import PyHunter
 
-from modules.core.Person import Mail
+from modules.core.Mail import Mail
 from modules.evaluators.EvaluatorFather import *
 
 

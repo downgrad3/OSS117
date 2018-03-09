@@ -8,14 +8,15 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
 
 class LinkedinCrawler(CollectorFather):
+
     def __init__(self):
         super(LinkedinCrawler, self).__init__()
         self.logger = Logger.initialize_logger("linkedincrawler", setting.LOGS_COLLECTORS_DIR)
-        self.profiles = {}  # todo: not used for now
+        self.profiles = {}  # todo: not used for now, will be used when OOP will be implemented
 
     def login_if_necessary(self, profile_link):
         """
-            Prerequisite: Credentials of linkedin acount need to be set in the configuration file
+            Prerequisite: Credentials of linkedin account need to be set in the configuration file
             Login on linkedin.com and redirect the crawler to the profile page pointed by profile_link
 
             :param profile_link: the profile URI where the crawler will be redirected after the login phase
@@ -42,11 +43,11 @@ class LinkedinCrawler(CollectorFather):
             Given a target organization name and a ammount of page to scrap
             Collect all linkedin profiles of people working in this organization using Google dork
 
-            :param org_name: The name Le nom de l'organisation cible sur laquelle effectuer la recherche
+            :param org_name: The name of the organization where we are looking for profiles
             :type org_name: string
             :param nb_pages_to_scrap: Number of Google result page to scrap
             :type nb_pages_to_scrap: int
-            :return: Un tableau contenant les liens des profils linkedin de personnes travaillant dans cette organisation
+            :return: An Array containing the links of the linkedin profile (who might work ont this organization) we scrapped
         """
         self.logger.debug("BEGIN -- (org_name:" + org_name + ", nb_pages_to_scrap:" + str(nb_pages_to_scrap) + ")")
         self.driver.get("https://www.google.fr/")
@@ -82,14 +83,13 @@ class LinkedinCrawler(CollectorFather):
                     self.logger.debug("link:" + link + " already collected")
 
             try:
-                # Waiting few second before requesting the next page, because we're gentlemen
+                # Waiting few second before requesting the next page, because we're gentlemen and google doesn't like scrappers
                 time.sleep(random.randint(0, int(setting.config['COLLECTORS']['GOOGLE_SECONDS_WAITING_BETWEEN_TWO_SCRAPS'])))
-
                 self.driver.find_element_by_link_text("Suivant").click()
                 page += 1
                 self.logger.debug("next page")
             except NoSuchElementException:
-                # No Next result page, end of the scrapping
+                # No "Next" result page, end of the scrapping
                 pass
 
         self.logger.info(str(len(profiles_url)) + " collected")
@@ -150,9 +150,10 @@ class LinkedinCrawler(CollectorFather):
 
     def extract_name(self):
         """
-            Prerequisite: The selenium simulated browser (self.driver) is positionned on the profile page of the person we want to extract the name
+            Prerequisite: The selenium simulated browser (self.driver) is positioned on the profile page of the person we want to extract the name
             Extracting the name of the current selenium driver location (must be on a linkedin profile)
-        :return:
+
+            :return: String, the name of the current profile
         """
         name = ""
         try:
@@ -167,7 +168,8 @@ class LinkedinCrawler(CollectorFather):
         """
             Prerequisite: The selenium simulated browser (self.driver) is positionned on the profile page of the person we want to extract the name
             Extracting the current job of the current selenium driver location (must be on a linkedin profile)
-            :return:
+
+            :return: String, The current job of the current profile
         """
         current_job = ""
         try:
@@ -181,7 +183,7 @@ class LinkedinCrawler(CollectorFather):
 
     def extract_currentjoblocation(self):
         """
-            Prerequisite: The selenium simulated browser (self.driver) is positionned on the profile page of the person we want to extract the name
+            Prerequisite: The selenium simulated browser (self.driver) is positioned on the profile page of the person we want to extract the name
             Extracting the current job location of the current selenium driver location (must be on a linkedin profile)
             :return:
         """

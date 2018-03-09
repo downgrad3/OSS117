@@ -1,4 +1,4 @@
-from modules.core.Person import Mail
+from modules.core.Mail import Mail
 from modules.evaluators.MailEvaluator import MailEvaluator
 from modules.inferors.InferorFather import *
 
@@ -23,7 +23,7 @@ class MailInferor(InferorFather):
 
     def infer_mail(self, first_name, last_name, org_name, template_str="", tld=""):
         # todo: many code repetition, algorythm could be improved,
-        # todo: the evaluator do not ork very well
+        # todo: the evaluator do not work very well
         self.logger.debug("BEGIN - {first_name:" + first_name + ", last_name:" + last_name + ", org_name:" + org_name + ", template_str:" + template_str + ", tld:" + tld + "}")
         mail = Mail()
 
