@@ -7,12 +7,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
 
+
 class LinkedinCrawler(CollectorFather):
 
     def __init__(self):
         super(LinkedinCrawler, self).__init__()
         self.logger = Logger.initialize_logger("linkedincrawler", setting.LOGS_COLLECTORS_DIR)
-        self.profiles = {}  # todo: not used for now, will be used when OOP will be implemented
+        self.persons = {}  # todo: not used for now, will be used when OOP will be implemented
 
     def login_if_necessary(self, profile_link):
         """
@@ -144,7 +145,8 @@ class LinkedinCrawler(CollectorFather):
                 self.driver.get(profile_url)
                 nb_fail += 1
 
-        extracted_profile = {"name": self.extract_name(), "current_job": self.extract_curentjob(), "current_job_location": self.extract_currentjoblocation()}
+        full_name = self.extract_name()
+        extracted_profile = {"name": full_name[0]+" "+full_name[1], "current_job": self.extract_current_job_title(), "current_job_location": self.extract_current_job_location()}
         self.logger.debug("END -- return;" + str(extracted_profile))
         return extracted_profile
 
@@ -155,16 +157,20 @@ class LinkedinCrawler(CollectorFather):
 
             :return: String, the name of the current profile
         """
-        name = ""
+        first_name = ''
+        last_name = ''
         try:
             name = self.driver.find_element_by_class_name("pv-top-card-section__name")
             name = unidecode.unidecode(name.text.replace(',', ''))
-            self.logger.debug("profil" + self.driver.current_url + ", name extracted:" + name)
+            first_name = ''.join(name.rsplit(' ', 1)[:-1])
+            last_name = name.rsplit(' ', 1)[-1]
+
+            self.logger.debug("profil"+self.driver.current_url+", extracted - first_name:"+first_name+"last_name: "+last_name)
         except NoSuchElementException:
             self.logger.warning("profil" + self.driver.current_url + ", no name found")
-        return name
+        return [first_name, last_name]
 
-    def extract_curentjob(self):
+    def extract_current_job_title(self):
         """
             Prerequisite: The selenium simulated browser (self.driver) is positionned on the profile page of the person we want to extract the name
             Extracting the current job of the current selenium driver location (must be on a linkedin profile)
@@ -181,7 +187,7 @@ class LinkedinCrawler(CollectorFather):
 
         return current_job
 
-    def extract_currentjoblocation(self):
+    def extract_current_job_location(self):
         """
             Prerequisite: The selenium simulated browser (self.driver) is positioned on the profile page of the person we want to extract the name
             Extracting the current job location of the current selenium driver location (must be on a linkedin profile)

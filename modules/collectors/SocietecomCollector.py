@@ -9,8 +9,7 @@ class SocietecomCrawler(CollectorFather):
         self.logger = Logger.initialize_logger("societecomcrawler", setting.LOGS_COLLECTORS_DIR)
 
     def get_search_results(self, target_org):
-        # todo: maybe hold the case where we need to check all results (ie: "afficher la suite")
-        # or maybe not, if you do not know of to write your target name, maybe you should reconsider your recon+engagement
+        # improve: maybe hold the case where we need to check all results (ie: "afficher la suite" or maybe not, if you do not know how to write your target's name, maybe you should reconsider your recon+engagement
         results = []
         self.logger.debug("BEGIN -- (target_org:" + target_org + ")")
         self.driver.get("https://www.societe.com/")

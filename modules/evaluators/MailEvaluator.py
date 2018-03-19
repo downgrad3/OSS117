@@ -83,7 +83,7 @@ class MailEvaluator(EvaluatorFather):
             time.sleep(1)
 
     def evaluate_neverbounce(self, mail_list):
-        # todo: possible improvments
+        # improve: possible improvments
         for mail in mail_list:
             info = self.neverbounce_client.account_info()
             free_credits_remaining = info["credits_info"]["free_credits_remaining"]

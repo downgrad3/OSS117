@@ -2,7 +2,6 @@
 # Config file and Pycharm project folder
 config.ini
 todolist
-.idea/
 
 # Ignoring loot files
 loot/

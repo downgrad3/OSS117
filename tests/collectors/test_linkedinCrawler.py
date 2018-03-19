@@ -3,7 +3,6 @@ from unittest import TestCase
 from modules.collectors.LinkedInCollector import LinkedinCrawler
 
 
-# todo make thoses damn tests
 class TestLinkedinCrawler(TestCase):
     linkedin_crawler = LinkedinCrawler()
 
@@ -16,7 +15,7 @@ class TestLinkedinCrawler(TestCase):
         self.assertTrue(len(links) > 5)
 
     def test_extract_profile(self):
-        # First test, we will need to be authenticated, so it will also test the login
+
         profile = self.linkedin_crawler.extract_profile("https://www.linkedin.com/in/manon-lecompte-853a32158/")
         self.assertTrue("name" in profile and profile["name"] == "Manon Lecompte")
         self.assertTrue("current_job" in profile and profile["current_job"] == "Responsable Recrutement chez Total")

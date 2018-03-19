@@ -29,6 +29,7 @@ class MailInferor(InferorFather):
 
         first_name = first_name.lower()
         last_name = last_name.lower()
+        org_name = org_name.lower()
         template_map = {
             "firstname.lastname@org.tld": first_name + "." + last_name + "@" + org_name,
             "firstnamelastname@org.tld": first_name + last_name + "@" + org_name,
@@ -39,7 +40,6 @@ class MailInferor(InferorFather):
             "lastnamefirstname@org.tld": last_name + first_name + "@" + org_name,
             "l.firstname@org.tld": first_name[0] + "." + last_name + "@" + org_name,
         }
-        org_name = org_name.lower()
         mail_evaluator = MailEvaluator()
 
         # If no template is specified, we need to test all and for each of this one, test all of top level domain
@@ -75,7 +75,7 @@ class MailInferor(InferorFather):
         self.logger.debug("Returned mail: " + str(mail))
         return mail
 
-    def infer_valid_mail_pattern(self, firstname, lastname, org_name):
+    def infer_valid_mail_pattern(self, first_name, last_name, org_name):
         """
             Given a name of an organisation and a member working on it
             :param firstname: (String) Firstname or the member who is working on the orgname

@@ -20,3 +20,4 @@ class Mail:
     def __str__(self):
         return 'Object:<{}> - (address:{!r}, deliverable: {!r}, reputation: {!r}, breaches:{!r} ) '.format(
             self.__class__.__name__, self.address, self.deliverable, self.reputation, self.breaches)
+
