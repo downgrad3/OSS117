@@ -54,7 +54,7 @@ class MailEvaluator(EvaluatorFather):
     def evaluate_trumailio(self, mail_list):
         for mail in mail_list:
             self.logger.debug("Evaluating" + mail.address)
-            req = requests.get("https://trumail.io/json/" + mail.address)
+            req = requests.get("https://api.trumail.io/v1/json/" + mail.address)
             if req.text is not "":
                 json_resp = json.loads(req.text)
                 self.logger.debug("API Response:" + req.text)
