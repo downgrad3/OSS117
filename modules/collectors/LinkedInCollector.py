@@ -55,7 +55,7 @@ class LinkedinCrawler(CollectorFather):
         self.driver.find_element_by_id("lst-ib").click()
         self.driver.find_element_by_id("lst-ib").clear()
         self.driver.find_element_by_id("lst-ib").send_keys(
-            "site:\"linkedin.com\" intitle:\"Profil professionnel\" intext:\"" + org_name + "\"")
+            "site:\"linkedin.com\" intitle:\"" + org_name + "\"  inurl:\"linkedin.com/in/\"")
         self.driver.find_element_by_name("btnK").click()
 
         profiles_url = []

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*
 from modules.collectors.CollectorFather import *
+from modules.core.Entities import *
 
 
 class SocietecomCrawler(CollectorFather):
@@ -28,7 +29,10 @@ class SocietecomCrawler(CollectorFather):
         return results
 
     def extract_information(self, link):
+
         self.logger.debug("BEGIN -- (link:" + link + ")")
+
+        org = Organization()
         res = []
         self.driver.get(link)
         org_name = self.driver.find_element_by_class_name("nomSociete").text
@@ -36,6 +40,14 @@ class SocietecomCrawler(CollectorFather):
         street = address_bloc[0].text
         (postal_code, town) = address_bloc[1].text.split()
         country = address_bloc[2].text
+        last_update = self.driver.find_element_by_xpath("//td[contains(text(), 'Date de dernière mise à jour')]/following::td")
+
+        org.business_name = org_name
+        org.location = Location(street, town, postal_code, "")
+        org.creation_date = 3
+        org.last_information_update_date = 3
+        org.number_of_employees = 3
+
         res = [org_name, street, postal_code, town, country]
         self.logger.debug("END -- (res:" + str(res) + ")")
         return res

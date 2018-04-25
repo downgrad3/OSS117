@@ -4,7 +4,7 @@ from modules.core.Location import Location
 
 class Job:
 
-    def __init__(self, title="", description="", location=Location(), start_date=datetime.date(0, 1, 1), end_date=datetime.date(9999, 10, 27), comment="Nothing to see here"):
+    def __init__(self, title="", description="", location=Location(), start_date=datetime.date(1990, 1, 1), end_date=datetime.date(9999, 10, 27), comment="Nothing to see here"):
         self.title = title
         self.description = description
         self.location = location
