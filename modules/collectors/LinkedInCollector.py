@@ -7,7 +7,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
 
-
 class LinkedinCrawler(CollectorFather):
 
     def __init__(self):

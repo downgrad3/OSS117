@@ -49,7 +49,10 @@ class Scenario1:
 
         # XXX: Ecriture dans un fichier, code temporaire (je refais un parcours du tableau au lieu d'ecrire a la volee
         # a terme envisager une db ou des fct d'import export
-        f_out = open(setting.LOOT_DIR + "/" + target_org + "linkedinDescribedProfiles.txt", "w")
+
+        filename = setting.LOOT_DIR + "/" + target_org + "/" + "linkedinDescribedProfiles.txt"
+        setting.os.makedirs(setting.os.path.dirname(filename), exist_ok=True)
+        f_out = open(filename, "w+")
         for p in profiles:
             f_out.write(p['name'] + "; " + p['current_job'] + "; " + p['current_job_location'] + "\n")
         f_out.close()
