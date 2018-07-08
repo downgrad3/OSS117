@@ -8,12 +8,10 @@ It can be used by:
 - Red-teams during their recon phase to prepare their engagement (identify VIP, craft username wordlists, gather people interest for SE scenarios, etc.)
 - Blue-teams to have a picture about their organisation fingerprint in the wild (ie: information avalaible for a potential adversary)
 
-
 The project is built around 3 modules types:
 - COLLECTORS: which gathers data though multiples sources
 - INFERORS: which finds new pieces of data using the data we got
 - EVALUATORS: which evaluates the data we have
-
 
 Using those modules you can craft the scenarios you want. For instance for a given organization
 1. COLLECTORS - Collect all employees (name + job + location) using Linkedin. 
@@ -28,4 +26,9 @@ and email checker API (deliverability, reputation, etc.)
 and so on...
 
 
-This is the very first steps for this project, if you have any idea of modules, scenarios, feel free to contact me at tahar.bennacef.farewell@gmail.com
+Here's a <a href="https://www.youtube.com/watch?v=elhEocatrdM"> basic POC </a> I've made. 
+Notice that the scrap speed is configurable but is deliberately slow to get busted by Google and Linkedin 
+
+
+
+These are the very first steps for this project, if you have any idea of modules, scenarios, feel free to contact me at tahar.bennacef.farewell@gmail.com
