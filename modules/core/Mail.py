@@ -4,8 +4,7 @@ class Mail:
     NO_INFORMATION = "no_information"
 
     def __init__(self, address="abcd@test.fr", deliverable=NO_INFORMATION, reputation=50, breaches=None):
-        """
-            Class constructor
+        """ Class constructor
 
             :param address:  The string mail adress
             :param deliverable:  Does this mail is deliverable
@@ -16,6 +15,7 @@ class Mail:
         self.deliverable = deliverable
         self.reputation = reputation
         self.breaches = {} if breaches is None else breaches
+
 
     def __str__(self):
         return 'Object:<{}> - (address:{!r}, deliverable: {!r}, reputation: {!r}, breaches:{!r} ) '.format(

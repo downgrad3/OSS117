@@ -22,6 +22,7 @@ class TestMailEvaluator(TestCase):
         self.assertEqual({}, mails[3].breaches)
 
     def test_evaluate_mailtestercom(self):
+        # TODO: restest this point, i get bn easily
         mails = [
             Mail("bill.dudney@apple.com"),
             Mail("frederique.blanc@renault.com"),

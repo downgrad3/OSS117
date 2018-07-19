@@ -15,8 +15,6 @@ from modules.core.Utils import *
 from modules.inferors.MailInferor import *
 
 
-
-
 class Scenario1:
 
     def run(self, target_org, google_pages_to_scrap):

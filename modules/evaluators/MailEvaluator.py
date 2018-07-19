@@ -69,8 +69,10 @@ class MailEvaluator(EvaluatorFather):
             req = requests.post("http://mailtester.com/testmail.php", data=payload)
 
             if '>E-mail address is valid</td>' in req.text:
+                self.logger.debug(mail.address + "is " + Mail.DELIVERABLE_MAIL)
                 mail.deliverable = Mail.DELIVERABLE_MAIL
             elif 'E-mail address does not exist on this server' in req.text:
+                self.logger.debug(mail.address + "is " + Mail.NON_DELIVERABLE_MAIL)
                 mail.deliverable = Mail.NON_DELIVERABLE_MAIL
             elif "Server doesn't allow e-mail address verification" in req.text:
                 self.logger.debug(mail.address + ": Server doesn't allow e-mail address verification")

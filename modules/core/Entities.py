@@ -4,14 +4,16 @@ from modules.core.Job import Job
 import setting
 from datetime import datetime
 
+
 class Organization:
     #todo: nothing is done there, no string representation, no default values
-    def __init__(self, business_name="", location=Location(), creation_date=datetime.now(), number_of_employees=0, last_information_update_date=datetime.now()):
+    def __init__(self, business_name="", location=Location(), creation_date=datetime.now(), number_of_employees=0, last_information_update_date=datetime.now(), vip=None):
         self.business_name = business_name
         self.location = location
         self.creation_date = creation_date
         self.number_of_employees = number_of_employees
         self.last_information_update_date = last_information_update_date
+        self.vip = [] if vip is None else vip
 
     def write_in_file(self, file_name):
         f_out = open(setting.LOOT_DIR + "/" + file_name)

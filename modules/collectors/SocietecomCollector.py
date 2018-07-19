@@ -41,7 +41,11 @@ class SocietecomCrawler(CollectorFather):
         (postal_code, town) = address_bloc[1].text.split()
         country = address_bloc[2].text
         last_update = self.driver.find_element_by_xpath("//td[contains(text(), 'Date de dernière mise à jour')]/following::td")
+        creation_date = self.driver.find_element_by_xpath("//td[contains(text(), 'Date immatriculation RCS')]/following::td")
+        number_of_employees =  self.driver.find_element_by_xpath("//td[contains(text(), 'Tranche d'effectif	')]/following::td")
 
+
+        # todo: make this function return an Organization
         org.business_name = org_name
         org.location = Location(street, town, postal_code, "")
         org.creation_date = 3
@@ -49,5 +53,11 @@ class SocietecomCrawler(CollectorFather):
         org.number_of_employees = 3
 
         res = [org_name, street, postal_code, town, country]
+
+
+
+
+
         self.logger.debug("END -- (res:" + str(res) + ")")
         return res
+
