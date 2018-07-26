@@ -6,7 +6,7 @@
 OSS117 is a tool designed to craft intelligence based on open sources data.
 It can be used by:
 - Red-teams during their recon phase to prepare their engagement (identify VIP, craft username wordlists, etc.)
-- Blue-teams to see what information their organization concede to a potential adversary
+- Blue-teams to get a picture of your organisation footprint / What intell we concede to a potential adversary
 
 
 The project is built around 3 modules types:
@@ -22,14 +22,19 @@ and email checker API (deliverability, reputation, etc.)
 3. EVALUATOR - Check if one mail appears in haveIbeenPwned
 
 ---- Scenario#2 ----
-1. COLLECTORS - Collect all employees (name + job + location + interest) using Linkedin. 
+1. COLLECTORS - Collect all employees information using Linkedin (name + job + location + interest). 
 2. INFERORS - Derivate username/password wordlists using the data collected (name, location, interest, etc.)
+
+---- Scenario#3 ----
+1. COLLECTORS - Collect employees name, interest
+2. INFEREROS - Try to identificate employee's account using checkusernames / namechk, etc.
+
 
 and so on...
 
 
 Here's a <a href="https://www.youtube.com/watch?v=elhEocatrdM"> basic POC </a> I've made. 
-Notice that the scrap speed is configurable but is deliberately slow to get busted by Google and Linkedin 
+Notice that the scrap speed is configurable but is deliberately slow to avoid to be busted by Google and Linkedin 
 
 
 
