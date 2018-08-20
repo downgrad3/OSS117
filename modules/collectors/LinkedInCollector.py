@@ -11,8 +11,12 @@ class LinkedinCrawler(CollectorFather):
 
     def __init__(self):
         super(LinkedinCrawler, self).__init__()
-        self.logger = Logger.initialize_logger("linkedincrawler", setting.LOGS_COLLECTORS_DIR)
         self.persons = {}  # todo: not used for now, will be used when OOP will be implemented
+
+        # Testing if all mandatories variables for the linkedin crawler are correctly set in the config.ini
+        mandatories_cfg_vars = ['LINKEDIN_LOGIN', 'LINKEDIN_PASSWD', 'LINKEDIN_SECONDS_WAITING_BETWEEN_TWO_SCRAPS']
+        Oss117.check_mandatories_var_in_config_file("COLLECTORS", mandatories_cfg_vars, self.logger)
+
 
     def login_if_necessary(self, profile_link):
         """
@@ -101,8 +105,6 @@ class LinkedinCrawler(CollectorFather):
             Extracting all linkedin profile giving a list of url pointing on those profiles
 
             :param profile_urls: list of url pointing on linkedin profiles
-            :type org_name: String<array>
-
             :return: a list of profile
         """
         self.logger.debug("BEGIN -- (profile_link:" + str(profile_urls) + ")")

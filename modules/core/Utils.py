@@ -1,5 +1,4 @@
-import logging
-import random
+import logging, random, setting
 from logging.handlers import RotatingFileHandler
 
 
@@ -86,3 +85,12 @@ class Oss117:
 
         print(" " * (quote_len - 7) + "\\")
         print(" " * (quote_len - 6) + "(◕_◕)╦╤─ ҉ ~ •")
+
+    @staticmethod
+    def check_mandatories_var_in_config_file(moduletype, mandatories_var, logger):
+        # Testing if all mandatories variables are correctly set in the config.ini
+        collectors_cfg = setting.config[moduletype]
+        if not all(elem in collectors_cfg for elem in mandatories_var):
+            logger.critical('Missing variables for the linkedin crawler, please review your config file. Mandatories variables are: ' + str(mandatories_var))
+            print("Missing variables for the linkedin crawler, please review your config file. Mandatories variables are:" + str(mandatories_var))
+            exit(1)

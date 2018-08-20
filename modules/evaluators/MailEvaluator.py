@@ -13,7 +13,10 @@ class MailEvaluator(EvaluatorFather):
     def __init__(self):
 
         super(MailEvaluator, self).__init__()
-        self.logger = Logger.initialize_logger("mailevaluator", setting.LOGS_EVALUATORS_DIR)
+
+        # Testing if all mandatories variables for the Mail evaluator are correctly set in the config.ini
+        mandatories_cfg_vars = ['LINKEDIN_LOGIN', 'LINKEDIN_PASSWD', 'LINKEDIN_SECONDS_WAITING_BETWEEN_TWO_SCRAPS']
+        Oss117.check_mandatories_var_in_config_file("EVALUATORS", mandatories_cfg_vars, self.logger)
 
         try:
             # The neverbounce library https://github.com/NeverBounce/NeverBounceApi-Python
