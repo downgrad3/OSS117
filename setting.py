@@ -3,7 +3,6 @@
 import configparser
 import os
 
-# todo: voir si je peux pas faire ca par défaut, ie le code detecte la classe et en fct de la classe met le log où il faut
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 LOOT_DIR = os.path.join(PROJECT_DIR, 'loot')
 MODULE_DIR = os.path.join(PROJECT_DIR, 'modules')

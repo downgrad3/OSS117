@@ -7,7 +7,6 @@ from modules.core.Entities import *
 class SocietecomCrawler(CollectorFather):
     def __init__(self):
         super(SocietecomCrawler, self).__init__()
-        self.logger = Logger.initialize_logger("societecomcrawler", setting.LOGS_COLLECTORS_DIR)
 
     def get_search_results(self, target_org):
         # improve: maybe hold the case where we need to check all results (ie: "afficher la suite" or maybe not, if you do not know how to write your target's name, maybe you should reconsider your recon+engagement

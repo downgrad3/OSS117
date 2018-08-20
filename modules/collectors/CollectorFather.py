@@ -1,10 +1,9 @@
 from __future__ import unicode_literals
 
 import setting
-from modules.core.Utils import Logger
-import time
-import random
+from modules.core.Utils import Logger, Oss117
 
+import time, random
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -15,9 +14,8 @@ class CollectorFather(object):
     def __init__(self):
         # Initiating the selenium driver, let's crawl
         self.driver = webdriver.Chrome()
-
-        # A logger that need to instanciate in the daughter class
-        self.logger = None
+        # Logger, because log is life
+        self.logger = Logger.initialize_logger(self.__class__.__name__, setting.LOGS_COLLECTORS_DIR)
 
     def __del__(self):
         self.driver.close()
