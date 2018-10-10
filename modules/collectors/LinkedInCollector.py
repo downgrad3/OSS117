@@ -74,7 +74,7 @@ class LinkedinCrawler(CollectorFather):
                 pass
 
             # Gathering all search results
-            a_tags = self.driver.find_elements_by_xpath("//h3/a")
+            a_tags = self.driver.find_elements_by_xpath("//h3/..")
             for a_tag in a_tags:
                 link = a_tag.get_attribute("href")
                 if link not in profiles_url:
