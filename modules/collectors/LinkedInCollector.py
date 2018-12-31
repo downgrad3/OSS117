@@ -11,16 +11,14 @@ class LinkedinCrawler(CollectorFather):
 
     def __init__(self):
         super(LinkedinCrawler, self).__init__()
-        self.persons = {}  # todo: not used for now, will be used when OOP will be implemented
 
         # Testing if all mandatories variables for the linkedin crawler are correctly set in the config.ini
         mandatories_cfg_vars = ['LINKEDIN_LOGIN', 'LINKEDIN_PASSWD', 'LINKEDIN_SECONDS_WAITING_BETWEEN_TWO_SCRAPS']
         Oss117.check_mandatories_var_in_config_file("COLLECTORS", mandatories_cfg_vars, self.logger)
 
-
     def login_if_necessary(self, profile_link):
         """
-            Prerequisite: Credentials of linkedin account need to be set in the configuration file
+            Prerequisite: Linkedin account credz need to be set in the configuration file
             Login on linkedin.com and redirect the crawler to the profile page pointed by profile_link
 
             :param profile_link: the profile URI where the crawler will be redirected after the login phase
@@ -55,11 +53,8 @@ class LinkedinCrawler(CollectorFather):
         """
         self.logger.debug("BEGIN -- (org_name:" + org_name + ", nb_pages_to_scrap:" + str(nb_pages_to_scrap) + ")")
         self.driver.get("https://www.google.fr/")
-        self.driver.find_element_by_id("lst-ib").click()
-        self.driver.find_element_by_id("lst-ib").clear()
-        self.driver.find_element_by_id("lst-ib").send_keys(
-            "site:\"linkedin.com\" intitle:\"" + org_name + "\"  inurl:\"linkedin.com/in/\"")
-        self.driver.find_element_by_name("btnK").click()
+        self.driver.find_element_by_name("q").send_keys("site:\"linkedin.com\" intitle:\"" + org_name + "\"  inurl:\"linkedin.com/in/\"")
+        self.driver.find_element_by_name("q").send_keys(Keys.ENTER)
 
         profiles_url = []
         for page in range(nb_pages_to_scrap):
@@ -74,7 +69,7 @@ class LinkedinCrawler(CollectorFather):
                 pass
 
             # Gathering all search results
-            a_tags = self.driver.find_elements_by_xpath("//h3/a")
+            a_tags = self.driver.find_elements_by_xpath("//div[@class='r']/a")
             for a_tag in a_tags:
                 link = a_tag.get_attribute("href")
                 if link not in profiles_url:
@@ -147,9 +142,10 @@ class LinkedinCrawler(CollectorFather):
                 nb_fail += 1
 
         full_name = self.extract_name()
-        extracted_profile = {"name": full_name[0]+" "+full_name[1], "current_job": self.extract_current_job_title(), "current_job_location": self.extract_current_job_location()}
+        extracted_profile = {"name": full_name[0]+" "+full_name[1], "current_job": self.extract_current_job_title(), "current_job_location": self.extract_current_job_location(), "photo_url": self.extract_photo_url(full_name[0]+"_"+full_name[1]+"_linkedin.jpg")}
         self.logger.debug("END -- return;" + str(extracted_profile))
         return extracted_profile
+
 
     def extract_name(self):
         """
@@ -170,6 +166,29 @@ class LinkedinCrawler(CollectorFather):
         except NoSuchElementException:
             self.logger.warning("profil" + self.driver.current_url + ", no name found")
         return [first_name, last_name]
+
+    def extract_photo_url(self, name):
+        """
+            Prerequisite: The selenium simulated browser (self.driver) is positioned on the profile page of the person we want to extract the photo
+            Extracting the photo of the current selenium driver location (must be on a linkedin profile), and store it in the relevant loot folder
+
+
+            :return: String, the name of the current profile
+        """
+        photo_url = ""
+        try:
+            photo_url = self.driver.find_element_by_class_name("pv-top-card-section__photo")
+            style = photo_url.get_attribute("style")
+
+            import re
+            a = re.match(r"url\(\"(.+)\"\);", style)
+            pattern = re.compile(r"^Some \w+ text.$")
+
+
+        except NoSuchElementException:
+            self.logger.warning("profil" + self.driver.current_url + ", photo url cannot been extracted")
+
+        return photo_url
 
     def extract_current_job_title(self):
         """

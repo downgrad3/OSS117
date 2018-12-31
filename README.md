@@ -38,4 +38,4 @@ Notice that the scrap speed is configurable but is deliberately slow to avoid to
 
 
 
-These are the very first steps for this project, if you have any idea of modules, scenarios, feel free to contact me at tahar.bennacef.farewell@gmail.com
+These are the very first steps for this project, if you have any idea of modules, scenarios, feel free to contact me. It will be a pleasure

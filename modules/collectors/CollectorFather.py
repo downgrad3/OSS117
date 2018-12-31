@@ -7,7 +7,7 @@ import time, random
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.common.keys import Keys
 
 class CollectorFather(object):
     # ------------------------- BEGIN: Building the selenium crawler and the logger every collector will have ------------------------- #

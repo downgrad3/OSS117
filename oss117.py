@@ -14,7 +14,7 @@ arguments = docopt(__doc__)
 schema = Schema(
     {
         '<target>': And(str, lambda s: len(s) >= 3, Use(str.lower)),
-        '<pages>': And(Use(int), lambda n: 1 <= n <= 10)
+        '<pages>': And(Use(int), lambda n: 1 <= n <= 20)
     }
 )
 try:
