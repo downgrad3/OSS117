@@ -9,12 +9,11 @@ from docopt import docopt
 from schema import Schema, And, Use, SchemaError
 from modules.core.Utils import Oss117
 from modules.scenarios.scenario1 import Scenario1
-
 arguments = docopt(__doc__)
 schema = Schema(
     {
         '<target>': And(str, lambda s: len(s) >= 3, Use(str.lower)),
-        '<pages>': And(Use(int), lambda n: 1 <= n <= 10)
+        '<pages>': And(Use(int), lambda n: 1 <= n <= 30)
     }
 )
 try:

@@ -1,6 +1,7 @@
 # OSS117 - Open source scrapper for Inteligence ... 
 (c'mon, we'll find a better acronym later)
 
+
 <img src="https://img.static-smb.be/a/view/q75/w720/h480/2090887/e6c6eddf-3a56-4115-90fd-9d18764c912e-gif.gif" alt="looking for intel"/>
 
 OSS117 is a tool designed to craft intelligence based on open sources data.
@@ -39,3 +40,23 @@ Notice that the scrap speed is configurable but is deliberately slow to avoid to
 
 
 These are the very first steps for this project, if you have any idea of modules, scenarios, feel free to contact me at tahar.bennacef.farewell@gmail.com
+
+
+<h2> Installation </h2>
+
+<p>First you need to install dependencies<p>
+<pre><code>pip install -r requirements.txt</code></pre>
+
+<p>
+  Then you have to install a WebDriver.<br/> 
+  OSS117 use ChromeWebDriver which can be downloaded <a src="<p>OSS117 use ChromeWebDriver which can be downloaded <a href="http://chromedriver.chromium.org/downloads"> here</a>.
+  If you would like to use another browser, install the webdriver you want then modify the code located in CollectorFather.py
+</p>
+
+<p>
+  Finally you need to craft your config file.
+  An example is defined in config.ini.example
+<p>
+
+
+Have a nice OSINT.

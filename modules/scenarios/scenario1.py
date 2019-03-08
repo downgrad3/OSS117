@@ -55,9 +55,15 @@ class Scenario1:
             f_out.write(p['name'] + "; " + p['current_job'] + "; " + p['current_job_location'] + "\n")
         f_out.close()
 
-        """
+
         mail_inferor = MailInferor()
         firstname = profiles[0]['name'].split(" ")[0:-1]
         lastname = profiles[0]['name'].split(" ")[-1]
         print(mail_inferor.infer_mail(firstname[0], lastname[0], target_org, "firstname.lastname@org.tld"))
-        """
+
+        filename = setting.LOOT_DIR + "/" + target_org + "/" + "mails.txt"
+        setting.os.makedirs(setting.os.path.dirname(filename), exist_ok=True)
+        f_out = open(filename, "w+")
+        for p in profiles:
+            f_out.write( + "\n")
+        f_out.close()

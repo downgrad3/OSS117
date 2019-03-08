@@ -75,7 +75,9 @@ class MailInferor(InferorFather):
         self.logger.debug("Returned mail: " + str(mail))
         return mail
 
-    def infer_valid_mail_pattern(self, first_name, last_name, org_name):
+
+
+    def infer_valid_mail_pattern(self, first_name, last_name, org_name, tld=""):
         """
             Given a name of an organisation and a member working on it
             :param firstname: (String) Firstname or the member who is working on the orgname
