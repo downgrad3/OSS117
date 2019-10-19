@@ -52,10 +52,13 @@ class Scenario1:
         setting.os.makedirs(setting.os.path.dirname(filename), exist_ok=True)
         f_out = open(filename, "w+")
         for p in profiles:
-            f_out.write(p['name'] + "; " + p['current_job'] + "; " + p['current_job_location'] + "\n")
+            if 'name' in p and 'current_job' in p and 'current_job_location' in p:
+                f_out.write(str(p['name']) + "; " + str(p['current_job']) + "; " + str(p['current_job_location']) + "\n")
         f_out.close()
 
 
+
+        #fixme: c'est degeulasse j'ai mal a mon code la. mais les contrainte de temps au taf ;;;
         mail_inferor = MailInferor()
         firstname = profiles[0]['name'].split(" ")[0:-1]
         lastname = profiles[0]['name'].split(" ")[-1]
@@ -65,5 +68,5 @@ class Scenario1:
         setting.os.makedirs(setting.os.path.dirname(filename), exist_ok=True)
         f_out = open(filename, "w+")
         for p in profiles:
-            f_out.write( + "\n")
+            f_out.write(  mail_inferor.infer_mail( p[0]['name'].split(" ")[0:-1], p[0]['name'].split(" ")[-1], target_org, "firstname.lastname@org.tld") + "\n")
         f_out.close()

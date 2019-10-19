@@ -112,11 +112,9 @@ class LinkedinCrawler(CollectorFather):
         first_name = ''
         last_name = ''
         try:
-            name = self.driver.find_element_by_class_name("pv-top-card-section__name")
-            name = unidecode.unidecode(name.text.replace(',', ''))
-            first_name = ''.join(name.rsplit(' ', 1)[:-1])
-            last_name = name.rsplit(' ', 1)[-1]
-
+            name = unidecode.unidecode(self.driver.find_element_by_class_name("break-words").text)
+            first_name = name.split()[0]
+            last_name = name.split()[1]
             self.logger.debug("profil"+self.driver.current_url+", extracted - first_name:"+first_name+"last_name: "+last_name)
         except NoSuchElementException:
             self.logger.warning("profil" + self.driver.current_url + ", no name found")
@@ -131,9 +129,11 @@ class LinkedinCrawler(CollectorFather):
             :return: String, the name of the current profile
         """
         photo_url = ""
+        # fixme: osef de la photo pour l'instant, a voir plus tard
+        """
         try:
             photo_url = self.driver.find_element_by_class_name("pv-top-card-section__photo")
-            style = photo_url.get_attribute("style")
+            style = photo_url.get_attribute("src")
 
             import re
             a = re.match(r"url\(\"(.+)\"\);", style)
@@ -142,7 +142,7 @@ class LinkedinCrawler(CollectorFather):
 
         except NoSuchElementException:
             self.logger.warning("profil" + self.driver.current_url + ", photo url cannot been extracted")
-
+        """
         return photo_url
 
     def extract_current_job_title(self):
@@ -154,11 +154,11 @@ class LinkedinCrawler(CollectorFather):
         """
         current_job = ""
         try:
-            current_job = self.driver.find_element_by_class_name("pv-top-card-section__headline")
-            current_job = unidecode.unidecode(current_job.text.replace(',', ''))
-            self.logger.debug("profil" + self.driver.current_url + ", current job extracted:" + current_job)
+            current_job = self.driver.find_element_by_class_name("t-18")
+            current_job = unidecode.unidecode(current_job.text)
+            self.logger.debug("profil: " + self.driver.current_url + ", current job extracted:" + current_job)
         except NoSuchElementException:
-            self.logger.warning("profil" + self.driver.current_url + ", no current job found")
+            self.logger.warning("profil: " + self.driver.current_url + ", no current job found")
 
         return current_job
 
@@ -170,11 +170,11 @@ class LinkedinCrawler(CollectorFather):
         """
         current_job_location = ""
         try:
-            current_job_location = self.driver.find_element_by_class_name("pv-top-card-section__location")
-            current_job_location = unidecode.unidecode(current_job_location.text.replace(',', ''))
-            self.logger.debug("profil:" + self.driver.current_url + " no current job location:" + current_job_location)
+            current_job_location = self.driver.find_elements_by_class_name("t-16")[1]
+            current_job_location = unidecode.unidecode(current_job_location.text)
+            self.logger.debug("profil: " + self.driver.current_url + " no current job location:" + current_job_location)
         except NoSuchElementException:
-            self.logger.warning("profil:" + self.driver.current_url + " no current job location found")
+            self.logger.warning("profil: " + self.driver.current_url + " no current job location found")
 
         return current_job_location
 
